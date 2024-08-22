@@ -8,7 +8,7 @@ class CounterAlertPage {
 
     async createCounterAlert() {
         await this.page.getByPlaceholder('Enter name for a new alert (').click();
-        await this.page.getByPlaceholder('Enter name for a new alert (').fill(process.env.ENV + ': Counter Automation UI');
+        await this.page.getByPlaceholder('Enter name for a new alert (').fill(process.env.ENV.toUpperCase() + ': Counter Alert Automation UI');
         await this.page.getByRole('combobox').selectOption('counter_alert');
         await this.page.getByRole('button', {name: 'Add new alert'}).click();
         await expect(this.page.getByRole('button', {name: 'Add new empty rule'})).toBeVisible();

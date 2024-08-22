@@ -7,7 +7,7 @@ class ContentAlertPage {
 
     async createCounterAlert() {
         await this.page.getByPlaceholder('Enter name for a new alert (').click();
-        await this.page.getByPlaceholder('Enter name for a new alert (').fill(process.env.ENV + ': Content Automation UI');
+        await this.page.getByPlaceholder('Enter name for a new alert (').fill(process.env.ENV.toUpperCase() + ': Content Alert Automation UI');
         await this.page.getByRole('combobox').selectOption('content_alert');
         await this.page.getByRole('button', {name: 'Add new alert'}).click();
 
