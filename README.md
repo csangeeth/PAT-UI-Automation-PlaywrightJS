@@ -1,3 +1,9 @@
+Install dependencies
+```npm i```
+
+
+Windows:
+<br>
 How to run using SSO credentials
 ```$env:ENV="sso"; npx playwright test```
 
