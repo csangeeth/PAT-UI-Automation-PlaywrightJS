@@ -6,25 +6,25 @@ class CounterAlertPage {
         this.page = page;
     }
 
-    async createCounterAlert(){
+    async createCounterAlert() {
         await this.page.getByPlaceholder('Enter name for a new alert (').click();
-        await this.page.getByPlaceholder('Enter name for a new alert (').fill('SSO Counter Automation UI');
+        await this.page.getByPlaceholder('Enter name for a new alert (').fill(process.env.ENV + ': Counter Automation UI');
         await this.page.getByRole('combobox').selectOption('counter_alert');
         await this.page.getByRole('button', {name: 'Add new alert'}).click();
         await expect(this.page.getByRole('button', {name: 'Add new empty rule'})).toBeVisible();
 
     }
 
-    async addRules(){
+    async addRules() {
         await this.page.getByRole('button', {name: 'Add new empty rule'}).click();
         await this.page.getByRole('button', {name: 'Add new empty rule'}).click();
         await this.page.getByRole('button', {name: 'Add new empty rule'}).click();
     }
 
-    async fillRuleDetails(){
-        await this.page.locator("(//input[@name='journalIssn'])[1]").fill("1474-9726");
-        await this.page.locator("(//input[@name='journalIssn'])[2]").fill("1474-9726");
-        await this.page.locator("(//input[@name='journalIssn'])[3]").fill("1474-9726");
+    async fillRuleDetails() {
+        await this.page.locator("(//input[@name='journalIssn'])[1]").fill(process.env.JOURNAL_ISSN);
+        await this.page.locator("(//input[@name='journalIssn'])[2]").fill(process.env.JOURNAL_ISSN);
+        await this.page.locator("(//input[@name='journalIssn'])[3]").fill(process.env.JOURNAL_ISSN);
 
         await this.page.locator('input[name="count"]').first().click();
         await this.page.locator('input[name="count"]').first().fill('1');
@@ -37,24 +37,24 @@ class CounterAlertPage {
         await this.page.getByRole('combobox').nth(2).selectOption('IN_ISSUE');
     }
 
-    async addEmail(){
+    async addEmail() {
         await this.page.locator("//button[normalize-space()='Add new recipient']").click()
-        await this.page.locator("//input[@name='email']").fill('csangeeth@wiley.com');
+        await this.page.locator("//input[@name='email']").fill(process.env.RECIPIENT);
     }
 
-    async testRule(){
+    async testRule() {
         await this.page.getByRole('button', {name: 'Test rules'}).click();
         await expect(this.page.locator('#alertDataContainer')).toContainText('All changes have been saved');
     }
 
-    async activeAlert(){
+    async activeAlert() {
         await this.page.locator('.green').click();
         await expect(this.page.locator('form[name="AlertForm"]')).toContainText('NOW ACTIVE');
         await this.page.waitForTimeout(5000)
     }
 
-    async reloadPage(){
-        await this.page.getByRole('link', { name: 'Publicity Alerts Tool' }).click();
+    async reloadPage() {
+        await this.page.getByRole('link', {name: 'Publicity Alerts Tool'}).click();
     }
 }
 
